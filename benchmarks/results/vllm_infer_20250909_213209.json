@@ -1,0 +1,28 @@
+{
+  "timestamp_utc": "20250909_213209",
+  "model": "meta-llama/Meta-Llama-3-70B-Instruct",
+  "num_prompts": 64,
+  "max_new_tokens": 64,
+  "temperature": 0.0,
+  "top_p": 1.0,
+  "tensor_parallel_size": 4,
+  "max_model_len": 4096,
+  "gpu_memory_utilization": 0.9,
+  "seed": 1234,
+  "elapsed_sec": 4.1515551982447505,
+  "total_output_tokens": 4096,
+  "total_prompt_tokens": 832,
+  "tokens_per_second": 986.6182200183105,
+  "env": {
+    "torch_version": "2.6.0a0+df5bbc09d1.nv24.12",
+    "cuda_version": "12.6",
+    "vllm_version": "0.7.3",
+    "gpu_count": 4,
+    "device_names": [
+      "NVIDIA GH200 120GB",
+      "NVIDIA GH200 120GB",
+      "NVIDIA GH200 120GB",
+      "NVIDIA GH200 120GB"
+    ]
+  }
+}

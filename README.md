@@ -16,12 +16,6 @@ DeltaAI is powered by NVIDIA GH200 Grace Hopper Superchips. For account setup, j
 ### Project Status
 This repository starts with documentation and planned structure. Container recipes and scripts will be filled in incrementally as we validate builds and runs on DeltaAI.
 
-Current progress:
-- Pulled GH200-optimized vLLM SIF from GHCR (`gh200_llm.sif`) using the image from [abacusai/gh200-llm](https://github.com/abacusai/gh200-llm/tree/main)
-- Added SLURM jobs for vLLM server and inference benchmark
-- Added interactive script to run vLLM benchmark against HF models
-- Verified TinyLlama and Qwen models run; gated models (Meta Llama, some Mistral) require accepting licenses on Hugging Face
-
 ### Repository Structure (planned)
 - `containers/`
   - `vllm.def` – Apptainer definition for vLLM (inference)
@@ -129,6 +123,15 @@ export HF_TOKEN=hf_xxxxxxxxxxxxxxxxxxxxxxxxx
 export HUGGINGFACE_HUB_TOKEN=$HF_TOKEN
 MODEL=meta-llama/Meta-Llama-3-8B-Instruct \
 ./scripts/interactive/vllm_llama3_benchmark.sh
+
+#### Llama-3-70B on 4 GPUs (interactive)
+Allocate 4 GPUs, set your HF token, then run:
+```
+srun --account=bbka-dtai-gh --partition=ghx4 --nodes=1 --gpus-per-node=4 --tasks=1 --cpus-per-task=32 --mem=192g --pty bash
+export HF_TOKEN=hf_xxxxxxxxxxxxxxxxxxxxxxxxx
+./scripts/interactive/vllm_llama70b_4gpu.sh
+```
+Defaults in the script use TP=4, MAX_MODEL_LEN=4096, GPU_MEM_UTIL=0.90, and eager mode to reduce CUDA graph issues. Adjust `NUM_PROMPTS`, `MAX_NEW_TOKENS`, or `MAX_MODEL_LEN` as needed.
 ```
 
 ```
@@ -161,14 +164,6 @@ python -m verl.trainer \
 - GPU scale: {1, 2, 4, 8} per node; then multi-node if applicable
 - Batch sizes and sequence lengths appropriate to model sizes and memory
 
-### Output and Reproducibility
-- Save run configs and metrics to `benchmarks/results/` (CSV/JSON). Large artifacts may be excluded from git.
-- Record software versions (driver, CUDA, framework, vLLM/VERL git SHAs) and container digests.
-- For comparable runs: pin seeds and document tokenization/backends.
-
-### Git Hygiene
-- Do not commit large model weights or datasets.
-- Keep `data/` excluded from git. Consider excluding large logs and `.sif` images.
 
 ### References
 - DeltaAI User Guide: https://docs.ncsa.illinois.edu/systems/deltaai/en/latest/index.html

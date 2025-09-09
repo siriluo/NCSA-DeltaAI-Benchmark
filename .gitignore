@@ -15,4 +15,8 @@ logs/
 __pycache__/
 *.pyc
 
+# Local caches and crash dumps
+.hf_cache/
+core
+
 

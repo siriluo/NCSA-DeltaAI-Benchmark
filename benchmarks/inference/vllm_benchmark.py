@@ -74,6 +74,11 @@ def parse_args() -> argparse.Namespace:
         help="Set VLLM_ALLOW_LONG_MAX_MODEL_LEN=1 to bypass model max length checks.",
     )
     parser.add_argument(
+        "--enforce-eager",
+        action="store_true",
+        help="Disable CUDA graphs by running in eager mode.",
+    )
+    parser.add_argument(
         "--results-path",
         type=str,
         default="",
@@ -114,6 +119,8 @@ def main() -> int:
         gpu_memory_utilization=args.gpu_memory_utilization,
         seed=args.seed,
     )
+    if args.enforce_eager:
+        llm_kwargs["enforce_eager"] = True
     if args.max_model_len is not None:
         llm_kwargs["max_model_len"] = args.max_model_len
 

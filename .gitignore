@@ -1,0 +1,18 @@
+# Containers
+*.sif
+
+# Data and datasets
+data/
+
+# Hugging Face caches (prefer local job caches)
+hf_home/
+**/huggingface/
+
+# Logs and results (keep small JSON results, ignore large logs)
+logs/
+
+# Python caches
+__pycache__/
+*.pyc
+
+

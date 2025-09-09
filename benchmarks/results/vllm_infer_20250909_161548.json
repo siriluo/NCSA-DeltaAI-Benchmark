@@ -1,0 +1,25 @@
+{
+  "timestamp_utc": "20250909_161548",
+  "model": "Qwen/Qwen2-7B-Instruct",
+  "num_prompts": 64,
+  "max_new_tokens": 128,
+  "temperature": 0.0,
+  "top_p": 1.0,
+  "tensor_parallel_size": 1,
+  "max_model_len": null,
+  "gpu_memory_utilization": 0.9,
+  "seed": 1234,
+  "elapsed_sec": 1.1860403930186294,
+  "total_output_tokens": 8192,
+  "total_prompt_tokens": 896,
+  "tokens_per_second": 6907.016024260589,
+  "env": {
+    "torch_version": "2.6.0a0+df5bbc09d1.nv24.12",
+    "cuda_version": "12.6",
+    "vllm_version": "0.7.3",
+    "gpu_count": 1,
+    "device_names": [
+      "NVIDIA GH200 120GB"
+    ]
+  }
+}
